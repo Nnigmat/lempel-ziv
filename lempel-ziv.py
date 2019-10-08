@@ -1,5 +1,6 @@
 from glob import iglob
 from os import path, mkdir, chdir, listdir
+from multiprocessing import Process
 
 OUT_DIRNAME = 'NikitaNigmatullinOutputs'
 INP_DIRNAME = 'dataset'
@@ -78,7 +79,11 @@ def get_folder_files(input_dirname):
 if __name__ == "__main__":
     create_output_directories(OUT_DIRNAME, INP_DIRNAME)
 
+    jobs = []
     for folder, files in get_folder_files(INP_DIRNAME).items():
         for f in files:
-            encrypt(f'{INP_DIRNAME}/{folder}/{f}', f'{OUT_DIRNAME}/{folder}/{f.split(".")[0]}Compressed.{f.split(".")[1]}')
+            p = Process(target=encrypt, args=(f'{INP_DIRNAME}/{folder}/{f}', f'{OUT_DIRNAME}/{folder}/{f.split(".")[0]}Compressed.{f.split(".")[1]}', ))
+            jobs.append(p)
+            p.start()
+
     # print(encrypt('dataset/doc/tmp.txt', 'NikitaNigmatullinOutputs/doc/temp.txt'))
