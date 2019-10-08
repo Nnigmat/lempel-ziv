@@ -85,5 +85,6 @@ if __name__ == "__main__":
             p = Process(target=encrypt, args=(f'{INP_DIRNAME}/{folder}/{f}', f'{OUT_DIRNAME}/{folder}/{f.split(".")[0]}Compressed.{f.split(".")[1]}', ))
             jobs.append(p)
             p.start()
-
+    for j in jobs:
+        j.join()
     # print(encrypt('dataset/doc/tmp.txt', 'NikitaNigmatullinOutputs/doc/temp.txt'))
