@@ -26,8 +26,8 @@ def encrypt(source_file_path, target_file_path):
         b = f.read(1)
         while b != b'':
             cur = int(f'{prev}{ord(b)}')
-            if cur not in codes:
-                substr = codes[prev]
+            if cur not in table:
+                substr = table[prev]
                 table[cur] = (step, substr[0], ord(b))
                 prev, step = 0, step + 1
             else:
