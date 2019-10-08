@@ -1,6 +1,5 @@
 from glob import iglob
 from os import path, mkdir, chdir, listdir
-from tree import Tree
 
 OUT_DIRNAME = 'NikitaNigmatullinOutputs'
 INP_DIRNAME = 'dataset'
